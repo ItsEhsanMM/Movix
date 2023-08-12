@@ -1,6 +1,10 @@
-
+import { useEffect } from "react";
+import { fetchDataFromApi } from "./utils/api";
 
 function App() {
+   useEffect(() => {
+      fetchDataFromApi("/movie/popular").then((res) => console.log(res));
+   }, []);
 
    return <>App </>;
 }
