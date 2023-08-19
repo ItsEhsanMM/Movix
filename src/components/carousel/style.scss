@@ -1,5 +1,9 @@
 @import "../../mixins.scss";
 
+* {
+   //    outline: 1px solid red;
+}
+
 .carousel {
    margin-bottom: 50px;
 
@@ -38,7 +42,7 @@
       left: 30px;
    }
 
-   .carouselRighttNav {
+   .carouselRightNav {
       right: 30px;
    }
 
