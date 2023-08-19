@@ -31,7 +31,6 @@ const HeroBanner = () => {
          url.backdrop +
          data?.results?.[Math.floor(Math.random() * data.results.length)]?.backdrop_path;
       setBackground(bg);
-      console.log(bg);
    }, [data]);
 
    const searchQueryHandler = (e) => {
