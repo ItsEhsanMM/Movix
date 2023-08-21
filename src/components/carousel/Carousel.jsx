@@ -65,7 +65,11 @@ const Carousel = ({ data, loading }) => {
                         : PosterFallback;
                      // console.log(item);
                      return (
-                        <div key={item.id} className="carouselItem">
+                        <div
+                           key={item.id}
+                           onClick={() => navigate(`/${item.media_type}/${item.id}`)}
+                           className="carouselItem"
+                        >
                            <div className="posterBlock">
                               <Img src={posterUrl} />
                               <CircleRating rating={item.vote_average.toFixed(1)} />
