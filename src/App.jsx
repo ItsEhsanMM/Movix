@@ -15,7 +15,7 @@ import NotFound from "./pages/404/NotFound";
 
 //rtk
 import { useSelector, useDispatch } from "react-redux";
-import { getApiConfiguration } from "./features/home/homeSlice";
+import { getApiConfiguration, getGenres as genres } from "./features/home/homeSlice";
 
 function App() {
    const dispatch = useDispatch();
@@ -23,6 +23,7 @@ function App() {
 
    useEffect(() => {
       apiTesting();
+      getGenres();
    }, []);
 
    const apiTesting = () => {
@@ -37,6 +38,25 @@ function App() {
          dispatch(getApiConfiguration(url));
       });
    };
+
+   const getGenres = async () => {
+      let promises = [];
+      let endpoints = ["tv", "movie"];
+      let allGenres = [];
+
+      endpoints.forEach((url) => {
+         promises.push(fetchDataFromApi(`/genre/${url}/list`));
+      });
+
+      const data = await Promise.all(promises);
+
+      data.map(({ genres }) => {
+         return genres.map((item) => (allGenres[item.id] = item));
+      });
+
+      dispatch(genres(allGenres));
+   };
+
    return (
       <>
          <Header />
