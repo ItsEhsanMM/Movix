@@ -64,7 +64,6 @@ const Carousel = ({ data, loading, endpoint, title }) => {
                      const posterUrl = item.poster_path
                         ? url.poster + item.poster_path
                         : PosterFallback;
-                     // console.log(item);
                      return (
                         <div
                            key={item.id}
