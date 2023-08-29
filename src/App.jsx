@@ -14,7 +14,7 @@ import Explore from "./pages/explore/Explore";
 import NotFound from "./pages/404/NotFound";
 
 //rtk
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getApiConfiguration, getGenres as genres } from "./features/home/homeSlice";
 
 function App() {
