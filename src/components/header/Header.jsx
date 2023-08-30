@@ -1,4 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+
+// Translation
+import { useTranslation } from "react-i18next";
+
+// svg
+import fa from "../../assets/ir.svg";
+import en from "../../assets/us.svg";
 
 // react router dom
 import { useLocation, useNavigate } from "react-router-dom";
@@ -17,6 +24,8 @@ import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
 
 const Header = () => {
+   const { t, i18n } = useTranslation();
+
    const [show, setShow] = useState("top");
    const [lastScrollY, setLastScrollY] = useState(0);
    const [mobileMenu, setMobileMenu] = useState(false);
@@ -82,12 +91,33 @@ const Header = () => {
             <div className="logo" onClick={() => navigate("/")}>
                <img src={logo} alt="logo" />
             </div>
+            <div
+               className="lang"
+               onClick={() => (
+                  window.location.reload(),
+                  i18n.resolvedLanguage === "en"
+                     ? i18n.changeLanguage("fa")
+                     : i18n.changeLanguage("en")
+               )}
+            >
+               {i18n.resolvedLanguage === "en" ? (
+                  <>
+                     <img src={en} />
+                     <p>en</p>
+                  </>
+               ) : (
+                  <>
+                     <img src={fa} />
+                     <p>fa</p>
+                  </>
+               )}
+            </div>
             <ul className="menuItems">
                <li className="menuItem" onClick={() => navigationHandler("movie")}>
-                  Movies
+                  {t("header.movies")}
                </li>
                <li className="menuItem" onClick={() => navigationHandler("tv")}>
-                  Tv Shows
+                  {t("header.tv")}
                </li>
                <li className="menuItem">
                   <HiOutlineSearch onClick={openSearch} />
@@ -111,7 +141,7 @@ const Header = () => {
                         type="text"
                         onChange={(e) => setQuery(e.target.value)}
                         onKeyUp={searchQueryHandler}
-                        placeholder="Search for a movie or tv show..."
+                        placeholder={t("searchTitle")}
                      />
                      <VscChromeClose onClick={() => setShowSearch(false)} />
                   </div>

@@ -1,0 +1,12 @@
+{
+   "header": {
+      "movies": "Movies",
+      "tv": "TV Shows"
+   },
+   "searchTitle": "Search for a movie or tv show...",
+   "main": {
+      "welcome": "Welcome",
+      "wSub": "Millions of movies, TV shows and people to discover. Explore now.",
+      "search": "search"
+   }
+}

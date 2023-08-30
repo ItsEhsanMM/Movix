@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 // react-redux
 import { useSelector } from "react-redux";
@@ -18,6 +19,8 @@ import Img from "../../../components/lazyLoadImage/img";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 
 const HeroBanner = () => {
+   const { t, i18n } = useTranslation();
+
    const [background, setBackground] = useState("");
    const [query, setQuery] = useState("");
    const navigate = useNavigate();
@@ -50,18 +53,22 @@ const HeroBanner = () => {
             <ContentWrapper>
                <div className="wrapper">
                   <div className="heroBannerContent">
-                     <span className="title">Welcome.</span>
-                     <span className="subTitle">
-                        Millions of movies, TV shows and people to discover. Explore now.
-                     </span>
-                     <div className="searchInput">
+                     <span className="title">{t("main.welcome")}</span>
+                     <span className="subTitle">{t("main.wSub")}</span>
+                     <div
+                        className={`${
+                           i18n.resolvedLanguage === "en"
+                              ? "searchInput"
+                              : "searchInputFa"
+                        }`}
+                     >
                         <input
                            type="text"
                            onChange={(e) => setQuery(e.target.value)}
                            onKeyUp={searchQueryHandler}
-                           placeholder="Search for a movie or tv show..."
+                           placeholder={t("searchTitle")}
                         />
-                        <button>Search</button>
+                        <button>{t("main.search")}</button>
                      </div>
                   </div>
                </div>

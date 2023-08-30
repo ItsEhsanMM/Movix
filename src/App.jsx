@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { fetchDataFromApi } from "./utils/api";
+import { useTranslation } from "react-i18next";
 
 // React-Router-Dom
 import { Routes, Route } from "react-router-dom";
@@ -18,6 +19,11 @@ import { useDispatch } from "react-redux";
 import { getApiConfiguration, getGenres as genres } from "./features/home/homeSlice";
 
 function App() {
+   const { i18n } = useTranslation();
+   useEffect(() => {
+      i18n.resolvedLanguage === "en" ? (document.dir = "ltr") : (document.dir = "rtl");
+   }, [i18n.resolvedLanguage]);
+
    const dispatch = useDispatch();
 
    useEffect(() => {
