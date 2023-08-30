@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useTranslation } from "react-i18next";
 
 import "./style.scss";
 
@@ -13,6 +14,8 @@ import noResults from "../../assets/no-results.png";
 import Img from "../../components/lazyLoadImage/img";
 
 const SearchResult = () => {
+   const { t } = useTranslation();
+
    const [data, setData] = useState(null);
    const [pageNum, setPageNum] = useState(1);
    const [loading, setLoading] = useState(false);
@@ -52,11 +55,7 @@ const SearchResult = () => {
             <ContentWrapper>
                {data?.results?.length ? (
                   <>
-                     <div className="pageTitle">
-                        {`Search ${
-                           data.total_results > 1 ? "results" : "result"
-                        } of '${query}'`}
-                     </div>
+                     <div className="pageTitle">{`${t("result")} "${query}"`}</div>
                      <InfiniteScroll
                         className="content"
                         dataLength={data.results.length || []}
@@ -72,7 +71,7 @@ const SearchResult = () => {
                   </>
                ) : (
                   <span className="resultNotFound">
-                     Sorry, Results not found!
+                     {t("not")}
                      <Img src={noResults} />
                   </span>
                )}

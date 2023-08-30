@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import "./style.scss";
 
@@ -7,6 +8,8 @@ import Img from "../../../components/lazyLoadImage/img";
 import avatar from "../../../assets/avatar.png";
 
 const Cast = ({ data, loading }) => {
+   const { t } = useTranslation();
+
    const { url } = useSelector((state) => state.home);
 
    const skeleton = () => {
@@ -21,7 +24,7 @@ const Cast = ({ data, loading }) => {
    return (
       <div className="castSection">
          <ContentWrapper>
-            <div className="sectionHeading">Top Cast</div>
+            <div className="sectionHeading">{t('cast')}</div>
             {!loading ? (
                <div className="listItems">
                   {data?.map((item) => {

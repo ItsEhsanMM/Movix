@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
 
 import "./style.scss";
 
@@ -14,20 +15,21 @@ import Spinner from "../../components/spinner/Spinner";
 
 let filters = {};
 
-const sortbyData = [
-   { value: "popularity.desc", label: "Popularity Descending" },
-   { value: "popularity.asc", label: "Popularity Ascending" },
-   { value: "vote_average.desc", label: "Rating Descending" },
-   { value: "vote_average.asc", label: "Rating Ascending" },
-   {
-      value: "primary_release_date.desc",
-      label: "Release Date Descending",
-   },
-   { value: "primary_release_date.asc", label: "Release Date Ascending" },
-   { value: "original_title.asc", label: "Title (A-Z)" },
-];
-
 const Explore = () => {
+   const { t } = useTranslation();
+
+   const sortbyData = [
+      { value: "popularity.desc", label: t("popD") },
+      { value: "popularity.asc", label: t("popA") },
+      { value: "vote_average.desc", label: t("rateD") },
+      { value: "vote_average.asc", label: t("rateA") },
+      {
+         value: "primary_release_date.desc",
+         label: t("oldest"),
+      },
+      { value: "primary_release_date.asc", label: t("newer") },
+      { value: "original_title.asc", label: t("sortTitle") },
+   ];
    const [data, setData] = useState(null);
    const [pageNum, setPageNum] = useState(1);
    const [loading, setLoading] = useState(false);
@@ -99,7 +101,7 @@ const Explore = () => {
          <ContentWrapper>
             <div className="pageHeader">
                <div className="pageTitle">
-                  {mediaType === "tv" ? "Explore TV Shows" : "Explore Movies"}
+                  {mediaType === "tv" ? t("exploreTv") : t("exploreMovie")}
                </div>
                <div className="filters">
                   <Select
@@ -111,17 +113,17 @@ const Explore = () => {
                      getOptionLabel={(option) => option.name}
                      getOptionValue={(option) => option.id}
                      onChange={onChange}
-                     placeholder="Select genres"
+                     placeholder={t("genre")}
                      className="react-select-container genresDD"
                      classNamePrefix="react-select"
                   />
                   <Select
-                     name="sortby"
+                     name={t("sort")}
                      value={sortby}
                      options={sortbyData}
                      onChange={onChange}
                      isClearable={true}
-                     placeholder="Sort by"
+                     placeholder={t("sort")}
                      className="react-select-container sortbyDD"
                      classNamePrefix="react-select"
                   />

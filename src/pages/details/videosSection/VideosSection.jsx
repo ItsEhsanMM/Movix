@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import "./style.scss";
 
@@ -9,6 +10,7 @@ import Img from "../../../components/lazyLoadImage/img";
 import PlayIcon from "../PlayIcon";
 
 const VideosSection = ({ data, loading }) => {
+   const { t } = useTranslation();
    const [show, setShow] = useState(false);
    const [videoId, setVideoId] = useState(null);
 
@@ -25,7 +27,7 @@ const VideosSection = ({ data, loading }) => {
    return (
       <div className="videosSection">
          <ContentWrapper>
-            <div className="sectionHeading">Official Videos</div>
+            <div className="sectionHeading">{t("official")}</div>
             {!loading ? (
                <div className="videos">
                   {data?.results.map((video) => {

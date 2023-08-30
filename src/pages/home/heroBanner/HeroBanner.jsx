@@ -40,6 +40,9 @@ const HeroBanner = () => {
       if (e.key === "Enter" && query.length) {
          navigate(`/search/${query}`);
       }
+      else if (e.target.type === "submit") {
+         navigate(`/search/${query}`);
+      }
    };
 
    return (
@@ -68,7 +71,7 @@ const HeroBanner = () => {
                            onKeyUp={searchQueryHandler}
                            placeholder={t("searchTitle")}
                         />
-                        <button>{t("main.search")}</button>
+                        <button onClick={searchQueryHandler}>{t("main.search")}</button>
                      </div>
                   </div>
                </div>
