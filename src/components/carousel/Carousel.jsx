@@ -32,7 +32,7 @@ const Carousel = ({ data, loading, endpoint, title }) => {
       });
    };
 
-   const skeItem = () => {
+   const SkeItem = () => {
       return (
          <div className="skeletonItem">
             <div className="posterBlock skeleton"></div>
@@ -44,7 +44,6 @@ const Carousel = ({ data, loading, endpoint, title }) => {
       );
    };
 
-   const skCount = [skeItem(), skeItem(), skeItem(), skeItem(), skeItem()];
 
    return (
       <div className="carousel">
@@ -78,7 +77,9 @@ const Carousel = ({ data, loading, endpoint, title }) => {
                               <Genres data={item.genre_ids.slice(0, 2)} />
                            </div>
                            <div className="textBlock">
-                              <span className="title">{item.title || item.name}</span>
+                              <span className="title">
+                                 {item.original_title || item.name}
+                              </span>
                               <span className="date">
                                  {dayjs(item.release_date).format("MMM D, YYYY")}
                               </span>
@@ -88,7 +89,13 @@ const Carousel = ({ data, loading, endpoint, title }) => {
                   })}
                </div>
             ) : (
-               <div className="loadingSkeleton">{skCount}</div>
+               <div className="loadingSkeleton">
+                  <SkeItem />
+                  <SkeItem />
+                  <SkeItem />
+                  <SkeItem />
+                  <SkeItem />
+               </div>
             )}
          </ContentWrapper>
       </div>

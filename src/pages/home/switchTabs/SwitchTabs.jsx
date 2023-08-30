@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import "./style.scss";
 
 const SwitchTabs = ({ data, onTabChange }) => {
+   const { t, i18n } = useTranslation();
+
    const [selectedTab, setSelectedTab] = useState(0);
    const [left, setLeft] = useState(0);
 
@@ -23,10 +26,16 @@ const SwitchTabs = ({ data, onTabChange }) => {
                   className={`tabItem ${selectedTab === index ? "active" : ""}`}
                   onClick={() => activeTab(tab, index)}
                >
-                  {tab}
+                  {(tab === "Day" && t("tabs.day")) ||
+                     (tab === "Week" && t("tabs.week")) ||
+                     (tab === "Movies" && t("header.movies")) ||
+                     (tab === "TV Shows" && t("header.tv"))}
                </span>
             ))}
-            <span className="movingBg" style={{ left }} />
+            <span
+               className={`${i18n.resolvedLanguage === "en" ? "movingBg" : "movingBgFa"}`}
+               style={{ left, right: left }}
+            />
          </div>
       </div>
    );
