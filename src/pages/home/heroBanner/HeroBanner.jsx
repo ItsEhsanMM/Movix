@@ -32,15 +32,18 @@ const HeroBanner = () => {
    useEffect(() => {
       const bg =
          url.backdrop +
-         data?.results?.[Math.floor(Math.random() * data.results.length)]?.backdrop_path;
+         data?.results?.[Math.floor(Math.random() * data.results.length)]
+            ?.backdrop_path;
+      if (bg) {
+         if (bg.includes("undefined")) bg.replace("undefined", "");
+      }
       setBackground(bg);
-   }, [data]);
+   }, [data, url]);
 
    const searchQueryHandler = (e) => {
       if (e.key === "Enter" && query.length) {
          navigate(`/search/${query}`);
-      }
-      else if (e.target.type === "submit") {
+      } else if (e.target.type === "submit") {
          navigate(`/search/${query}`);
       }
    };
@@ -71,7 +74,9 @@ const HeroBanner = () => {
                            onKeyUp={searchQueryHandler}
                            placeholder={t("searchTitle")}
                         />
-                        <button onClick={searchQueryHandler}>{t("main.search")}</button>
+                        <button onClick={searchQueryHandler}>
+                           {t("main.search")}
+                        </button>
                      </div>
                   </div>
                </div>
